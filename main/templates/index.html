@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'css/Scroller.css'%}">
+    <link rel="shortcut icon" href="{{ header.logo.url}}">
+   
+
+
+</head>
+
+<body>
+    <div class="container">
+        {% include "nav.html"%}
+        {% include "header.html"%}
+        <main>
+            <div class="wrapper">
+                {% include "education.html"%}
+                {% include "about.html" %}
+            </div>
+            {% include "experience.html"%}
+            {% include "skills.html"%}
+            {% include "projects.html"%}
+        </main>
+        {% include "footer.html"%}
+    </div>
+    <script src="{% static 'js/gsap.min.js'%}"></script>
+    <script>
+        const menu=document.getElementById("menu")
+        gsap.fromTo(menu,{y:-200, opacity:0},{y:0, duration:1.5, opacity:1})
+        const header=document.getElementById("header")
+        gsap.fromTo(header,{x:-200, opacity:0},{x:0, duration:1.5, opacity:1, delay:0.5})
+        const education=document.getElementById("education")
+        gsap.fromTo(education,{x:-200, opacity:0},{x:0, duration:1.5, opacity:1, delay:1})
+        const about=document.getElementById("about")
+        gsap.fromTo(about,{x:200, opacity:0},{x:0, duration:1.5, opacity:1, delay:1})
+        const experience=document.getElementById("experience")
+        gsap.fromTo(experience,{x:200, opacity:0},{x:0, duration:1.5, opacity:1, delay:2})
+        const skills=document.getElementById("skills")
+        gsap.fromTo(skills,{x:-200, opacity:0},{x:0, duration:1.5, opacity:1, delay:2.3})
+        const projects=document.getElementById("projects")
+        gsap.fromTo(projects,{x:200, opacity:0},{x:0, duration:1.5, opacity:1, delay:2.5})
+        const footer=document.getElementById("footer")
+        gsap.fromTo(footer,{y:200, opacity:0},{y:0, duration:1.5, opacity:1, delay:2.9})
+
+
+
+        const copyEmail = document.getElementById("copyEmail");
+        copyEmail.addEventListener("click", () => {
+            navigator.clipboard.writeText("{{ header.email }}")
+        })
+        const buttonLeft = document.querySelector(".experiences_left-btn")
+        const buttonRight = document.querySelector(".experiences_right-btn")
+        const sliderItems = document.querySelectorAll(".slider_item")
+        const multiplier = 103
+        sliderItems.forEach((sliderItem, index) => {
+            sliderItem.style.transform = `translate(${index * multiplier}%, -50%)`;
+        })
+        let offset = 0;
+        buttonLeft.style.opacity = 0.5
+
+        buttonLeft.addEventListener("click", () => {
+            if (offset < 0) {
+                offset++;
+                buttonRight.style.opacity = 1
+                if(offset === 0) {
+                    buttonLeft.style.opacity = 0.5
+                }else {
+                    buttonLeft.style.opacity = 1
+
+                }
+                sliderItems.forEach((sliderItem, index) => {
+                    sliderItem.style.transform = `translate(${(index + offset) * multiplier}%, -50%)`;
+                })
+            }
+        })
+
+        buttonRight.addEventListener("click", () => {
+            if (Math.abs(offset) < sliderItems.length - 1) {
+                offset--;
+                buttonLeft.style.opacity = 1
+                if(Math.abs(offset) === sliderItems.length - 1) {
+                    buttonRight.style.opacity = 0.5
+                }else {
+                    buttonRight.style.opacity = 1
+
+                }
+                sliderItems.forEach((sliderItem, index) => {
+                    sliderItem.style.transform = `translate(${(index + offset) * multiplier}%, -50%)`;
+                })
+            }
+        })
+        const menuButton=document.querySelector('.menu__mobile img')
+        const menuContent=document.querySelector('.menu__mobile-content')
+        menuButton.addEventListener("click",()=>{
+            menuContent.classList.toggle("open")
+            if(menuContent.classList.contains("open")){
+                menuButton.src="{%static 'images/close.png'%}"
+            }
+            else{
+                menuButton.src="{%static 'images/burger.png'%}"
+            }
+        })
+    </script>
+
+
+</body>
+
+</html>

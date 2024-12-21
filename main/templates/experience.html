@@ -1,0 +1,44 @@
+{% load static %}
+<section class="experiences block " id="experience">
+    <button class="experiences_left-btn">
+        <img src="{% static 'images/right-arrow.png'%}">
+    </button>
+    <div class="experiences_slider ">
+        {% for experience in experiences%}
+            <div class="block slider_item">
+                <div class="slider_item_header">
+                    <div>
+                        <h3>
+                            {{experience.position}}
+                        </h3>
+                        <p>
+                            {{experience.company}}
+                        </p>
+                        <p>
+                            {{experience.start_date}}-{% if end_date %}{{experience.end_date}} {% else %} Now {% endif %}
+                        </p>
+
+
+                    </div>
+                    <div>
+                        <img src="{{experience.logo.url}}">
+
+
+                    </div>
+
+                </div>
+                <ul>
+                    {% for line in experience.description %}
+                    <li>
+                        {{line}}
+                    </li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+        {% endfor %}
+    </div>
+    <button class="experiences_right-btn">
+        <img src="{% static 'images/right-arrow.png'%}">
+    </button>
+</section>

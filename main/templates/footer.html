@@ -1,0 +1,21 @@
+<footer class="block gradient" id="footer">
+    <div class="content footer">
+        <img src='{{header.logo.url}}' alt="logo">
+        <div class="footer__socials">
+            {% for item in socials %}
+                <a href="{{item.link}}" target="_blank">
+                    {{item.title}}
+                </a>
+            {% endfor %}
+        </div>
+    <div>
+        <p class="header__badge">
+            <span class="{% if header.available %} available {% endif %}">
+
+            </span>
+            AVAILABLE FOR JOB
+        </p>
+        
+    </div>
+    </div>
+</footer>

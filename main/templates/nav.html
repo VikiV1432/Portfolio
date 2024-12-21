@@ -1,0 +1,32 @@
+{% load static%}
+<nav class="menu" id="menu">
+    <div class="block menu__logo" >
+        <img src='{{header.logo.url}}' alt="logo">
+    </div>
+    <div class="block menu__links menu__full">
+        <a>
+            About
+        </a>
+        <a>
+            Portfolio
+        </a>
+        <a>
+            Contacts
+        </a>
+    </div>
+    <div class="block menu__links menu__mobile">
+        <img src='{% static "images/burger.png"%}' alt="logo">
+        
+    </div>
+</nav>
+<div class="menu__mobile-content block menu__links">
+    <a>
+        About
+    </a>
+    <a>
+        Portfolio
+    </a>
+    <a>
+        Contacts
+    </a>
+</div>

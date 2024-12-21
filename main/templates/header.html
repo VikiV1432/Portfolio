@@ -1,0 +1,32 @@
+{% load static %}
+<header class="block" id="header">
+    <div class="header__content">
+        <h2 class="header__position">
+            {{header.position}}
+        </h2>
+        <h1 class="header__title"> 
+            {{header.title}}
+        </h1>
+        <p class="header__description">
+            {{header.description}}
+        </p>
+        <button class="header__button header__hire">
+            Hire Me
+            <img src="{% static 'images/plus.svg'%}" alt="+">
+        </button>
+        <button class="header__button header__email" id="copyEmail">
+            Copy Email
+            <img src="{% static 'images/copy.svg'%}" alt="copy">
+        </button>
+    </div>
+    <div class="header__content">
+        <p class="header__badge">
+            <span class="{% if header.available %} available {% endif %}">
+
+            </span>
+            AVAILABLE FOR JOB
+        </p>
+        <img class="header__avatar" src="{{header.avatar.url}}"  alt="avatar"/>
+
+    </div>
+</header>

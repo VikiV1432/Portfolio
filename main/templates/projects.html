@@ -1,0 +1,23 @@
+{% load static %}
+<section class="projects" id="projects">
+    
+    {% for item in projects %}
+        <div class="project_item block ">
+            <div class="project_header">
+                <div >
+                    <h3>
+                        {{item.title}}
+                    </h3>
+                    <p class="project_description">
+                        {{item.description}}
+                    </p>
+                </div>
+                <a href="{{item.link}}" class="project_link">
+                    <img src="{% static 'images/link.svg'%}" alt="link">
+                </a>
+                
+            </div>
+            <img class="project_image "src="{{item.image.url}}" alt="{{item.title}}">
+        </div>
+    {% endfor %}
+</section>

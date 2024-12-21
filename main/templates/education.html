@@ -1,0 +1,23 @@
+<section class="block education" id="education">
+    <h2>
+        Education
+    </h2>
+    {% for item in educations %}
+        <div class="education_item">
+            <div>
+                <h3>
+                    {{item.specialization}}
+                </h3>
+                <p class="education_institution">
+                    {{item.institution}}
+                </p>
+                <p class="education_subjects">
+                    {{item.subjects}}
+                </p>
+            </div>
+            <p class="education_date">
+                {{item.start_date|date:"d.m.Y"}} - {{item.end_date|date:"d.m.Y"}}
+            </p>
+        </div>
+    {% endfor %}
+</section>
