@@ -106,7 +106,20 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+STORAGES={
+    'default':{
+        "BACKEND":"storages.backends.s3.S3Storage",
+        "OPTIONS":{
+            "location":"media",
+        }
+    },
+    'staticfiles':{
+        "BACKEND":"storages.backends.s3.S3Storage",
+        "OPTIONS":{
+            "location":"static",
+        }
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -123,24 +136,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-STATICFILES_DIRS=[BASE_DIR/'main']
-MEDIA_ROOT=BASE_DIR/'media'
-MEDIA_URL='/media/'
-STATIC_ROOT=BASE_DIR/"staticfiles"
-DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
-STATICFILES_STORAGE = "storages.backends.s3.S3Storage"
+MEDIA_ROOT='/media/'
+STATIC_ROOT="/static/"
 #AWS S3 settings 
-AWS_ACCESS_KEY_ID = 'your_aws_access_key_id' 
-AWS_SECRET_ACCESS_KEY = 'your_aws_secret_access_key' 
-AWS_STORAGE_BUCKET_NAME = 'your_bucket_name'
-AWS_S3_REGION_NAME = 'your_region' # e.g., 'us-west-1' 
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-AWS_QUERYSTRING_AUTH = False 
 AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
+STATIC_URL =f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+MEDIA_URL=f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
