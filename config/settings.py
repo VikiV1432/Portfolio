@@ -25,7 +25,8 @@ load_dotenv(BASE_DIR/'.env')
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')=="True"
+#DEBUG = os.getenv('DEBUG')=="True"
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['*']
@@ -47,8 +48,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -114,7 +115,7 @@ STORAGES={
         }
     },
     'staticfiles':{
-        "BACKEND":"storages.backends.s3.S3Storage",
+        "BACKEND":"whitenoise.storage.CompressedManifestStaticFilesStorage",
         "OPTIONS":{
             "location":"static",
         }
@@ -151,5 +152,5 @@ AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_FILE_OVERWRITE = False
-STATIC_URL =f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+STATIC_URL ='/static/'
 MEDIA_URL=f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
