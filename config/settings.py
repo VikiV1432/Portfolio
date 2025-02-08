@@ -152,3 +152,4 @@ AWS_S3_FILE_OVERWRITE = False
 STATIC_URL ='/static/'
 MEDIA_URL=f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+CSRF_TRUSTED_ORIGINS =["https://*.railway.app"]
